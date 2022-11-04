@@ -1,0 +1,133 @@
+
+import { useState } from 'react';
+import { StyleSheet, Text, View,Button, TextInput,FlatList } from 'react-native';
+
+const dummyData = [3,5,2];
+function addelement(){
+console.log(dummyData[index]);
+index=index+1;
+}
+
+function Click () {
+  console.log('clicked');
+}
+export default function App() {
+ const [enteredTextt,setEnteredTextt] = useState('');
+
+ const [Goals,setGoals] = useState([]);
+
+  function changeTextHandler(enteredText){
+setEnteredTextt(enteredText);
+  }
+
+  function addTextHandler(){
+    setGoals((currentGoals)=>[...currentGoals,enteredTextt]);
+  }
+
+  function resetTextHandler(){
+    const temp =Goals;
+
+    // removing the element using splice
+    temp.splice(idx, 1);
+
+    // updating the list
+    setGoals(temp);
+
+  }
+  // const item = ({item}) => (
+
+  // )
+  return (
+   <View style = {{flex:1}}>
+    <View style = {{height:200,alignItems:'center',justifyContent:'center'}}>
+    <View style = {styles.heading}>
+      <Text style = {styles.headingText}>ToDo App</Text> 
+      <View style = {styles.InputContainer}>
+     
+      <TextInput  style = {{borderWidth:1,margin:10}}  placeholder=' Kya karna hai'
+      onChangeText={changeTextHandler}/>
+      <Button title= "Add" 
+      onPress={addTextHandler}/>
+      
+      <Button title= "Reset"
+       onPress={resetTextHandler} />
+       
+      </View>
+      </View>
+      </View>
+    <View style={styles.container}>
+    <Text>Do this</Text>
+    <Text>HUa</Text>
+   <Button
+    title= "delete"
+    color= "red"
+    onPress={resetTextHandler}
+    />
+    
+     
+    </View>
+     
+    <View style = {{flex:5, backgroundColor:'yellow',padding :2}}>
+      <View>
+     <FlatList
+      data ={Goals}
+     renderItem = {(element) => {
+      return (
+<Text style = {styles.countContainer}
+>{element.item}</Text>
+      );
+     }}
+/>
+</View>
+<View> 
+  <Text>Check</Text>
+</View>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  heading:{ flex: 2,
+    backgroundColor: '#B4C259',
+
+    height: 200,
+    widht :'100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop:25,
+   
+  },
+  headingText: {
+    marginTop:45,
+    fontSize:25,
+    fontWeight:'bold',
+  },
+  InputContainer:{flex:1,
+    flexDirection:'row',
+    margin:10,
+
+alignItems: 'flex-start',
+justifyContent: 'space-evenly',
+  },
+  container: {
+   
+   flexDirection: 'row',
+    backgroundColor: '#D0D4B8',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  countContainer:{
+    fontSize:30,
+    color:'blue',
+    borderWidth: 2,
+    
+    borderColor: 'black',
+    borderRadius:8,
+    width: '70%',
+    margin: 8,
+    padding: 8,
+  },
+});
+
+
